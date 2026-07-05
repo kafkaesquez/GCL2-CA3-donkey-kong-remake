@@ -42,5 +42,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Player
+    uniqueID: 2932936769
+    locked: 0
+  - name: Ground
+    uniqueID: 591797839
+    locked: 0
+  - name: Everything Inbetween
+    uniqueID: 3463092095
+    locked: 0
+  - name: BG
+    uniqueID: 2677117575
+    locked: 0
   m_RenderingLayers:
   - Default
