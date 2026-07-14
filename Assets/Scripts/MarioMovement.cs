@@ -16,6 +16,8 @@ public class MarioMovement : MonoBehaviour
 
     public Animator marioanim;
 
+    public bool canMove = true; //shin's ending scene
+
     public GameObject hammer;
 
     
@@ -31,6 +33,17 @@ public class MarioMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canMove) //! means not, so, canMove = false? 
+        {
+            mariorb.linearVelocity = new Vector2(0, mariorb.linearVelocity.y);
+
+            marioanim.SetFloat("XVelocity", 0f);
+
+            return;
+        } //shin's ending scene 
+        
+        
+           
 
         // (Jeremy) Left Right Movement
         mariomovement.x = Input.GetAxisRaw("Horizontal");
