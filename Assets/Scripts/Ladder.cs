@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AnimatedValues;
 
 public class Ladder : MonoBehaviour
 {
     private float vertical;
     [SerializeField] private float Speed; //so that its easier to edit on inspector depending on the movement script that jeremy comes up with.
     [SerializeField] private float gravity; //reference to jeremy's gravity ltr on
-    [SerializeField] private Collider2D FinalHitbox;  //to trigger the animations for mario finishing his ladder climb, and to differentiate the two trigger hitboxes
 
     public bool isLadder;
     public bool isClimbing;
@@ -30,9 +30,10 @@ public class Ladder : MonoBehaviour
             isLadder = true;
             print("im in the ladder");
         }
-        if (collision == FinalHitbox)
+        if (collision.CompareTag("ClimbFinish"))
         {
-            isClimbingFinish = true; 
+            print("climb has finished");
+            marioanim.SetTrigger("isClimbingFinish"); //to trigger the animations for mario finishing his ladder climb
         }
 
     }
@@ -44,6 +45,8 @@ public class Ladder : MonoBehaviour
             isLadder = false;
             isClimbing = false;
             isClimbingFinish = false;
+            marioanim.speed = 1f;
+            marioanim.SetBool("isClimbing", isClimbing);
         }
     }
 
@@ -66,14 +69,12 @@ public class Ladder : MonoBehaviour
             rb.gravityScale = 0f;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * Speed); //makes it so mario can go up and down without gravity weighing on him
             marioanim.SetBool("isClimbing", isClimbing);
-            if (isClimbingFinish)
-            {
-                marioanim.SetTrigger("isClimbingFinish");
-            }
+            marioanim.speed = Mathf.Abs(vertical) > 0f ? 1f : 0f; //to calculate the climbing frames when mario moves instead of it being a static sprite when going up
         }
         else
         {
             rb.gravityScale = gravity;
+            marioanim.speed = 1f;
         }
     }
 }
