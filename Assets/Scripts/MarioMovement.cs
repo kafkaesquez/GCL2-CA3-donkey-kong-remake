@@ -12,6 +12,7 @@ public class MarioMovement : MonoBehaviour
     public float groundCheckRadius = 0.15f;
     public LayerMask groundLayer;
     public bool isGrounded;
+    public bool hasHammer;
 
     public Animator marioanim;
 
@@ -64,6 +65,9 @@ public class MarioMovement : MonoBehaviour
         {
             Destroy(hammer);  //(Jermaine) removes hammer sprite after picking up
             marioanim.SetBool("hasHammer", true);
+            hasHammer = true;
+
+
 
         }
     }
