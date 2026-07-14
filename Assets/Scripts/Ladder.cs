@@ -9,9 +9,9 @@ public class Ladder : MonoBehaviour
     [SerializeField] private float gravity; //reference to jeremy's gravity ltr on
     [SerializeField] private Collider2D FinalHitbox;  //to trigger the animations for mario finishing his ladder climb, and to differentiate the two trigger hitboxes
 
-    private bool isLadder;
-    private bool isClimbing;
-    private bool isClimbingFinish;
+    public bool isLadder;
+    public bool isClimbing;
+    public bool isClimbingFinish;
 
     public Animator marioanim;
 

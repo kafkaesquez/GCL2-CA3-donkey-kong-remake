@@ -15,6 +15,8 @@ public class MarioMovement : MonoBehaviour
 
     public Animator marioanim;
 
+    public GameObject hammer;
+
     
 
 
@@ -54,5 +56,16 @@ public class MarioMovement : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        print("Triggered by: " + collision.gameObject.name);
+
+        if (collision.gameObject.tag == "Hammer")  //(Jermaine) when mario picks up hammer
+        {
+            Destroy(hammer);  //(Jermaine) removes hammer sprite after picking up
+            marioanim.SetBool("hasHammer", true);
+
+        }
+    }
 
 }
