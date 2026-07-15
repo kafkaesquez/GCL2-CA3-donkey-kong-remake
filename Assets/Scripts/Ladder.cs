@@ -29,6 +29,7 @@ public class Ladder : MonoBehaviour
         {
             isLadder = true;
             print("im in the ladder");
+
         }
         if (collision.CompareTag("ClimbFinish"))
         {
