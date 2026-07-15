@@ -1960,7 +1960,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.2164526, y: 0.4438262}
+  m_Offset: {x: -1.0676203, y: 0.4438262}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1970,7 +1970,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5670948, y: 0.39004993}
+  m_Size: {x: 2.2694302, y: 0.39004993}
   m_EdgeRadius: 0
 --- !u!4 &420441284
 Transform:
@@ -3768,7 +3768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 972514428}
   - component: {fileID: 972514429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5274,7 +5274,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.011808455}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5284,7 +5284,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 1.0236169}
   m_EdgeRadius: 0
 --- !u!4 &1306250967
 Transform:
@@ -5295,7 +5295,7 @@ Transform:
   m_GameObject: {fileID: 1306250965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.25, y: 4.45, z: 0.025254777}
+  m_LocalPosition: {x: 30.25, y: 9.15, z: 0.025254777}
   m_LocalScale: {x: 1, y: 16.46568, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5488,7 +5488,7 @@ GameObject:
   - component: {fileID: 1348781830}
   - component: {fileID: 1348781831}
   - component: {fileID: 1348781832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mario
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -5632,7 +5632,7 @@ Transform:
   m_GameObject: {fileID: 1348781823}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.238, y: 10.761, z: 0}
+  m_LocalPosition: {x: 20.75, y: 0.71, z: 0}
   m_LocalScale: {x: 0.78662765, y: 0.78662765, z: 0.78662765}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5756,6 +5756,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 3
+  invincibilityDuration: 2
+  postmortem: 1.5
 --- !u!1 &1362483804
 GameObject:
   m_ObjectHideFlags: 0
@@ -8012,6 +8014,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2618076098316563451, guid: 182650808ad12354988f28b438712d72, type: 3}
+      propertyPath: skipBarrelChance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618076098316563451, guid: 182650808ad12354988f28b438712d72, type: 3}
+      propertyPath: normalBarrelPrefab
+      value: 
+      objectReference: {fileID: 5115355368530229779, guid: e358691b84754e8438c21befe842af3f, type: 3}
+    - target: {fileID: 2618076098316563451, guid: 182650808ad12354988f28b438712d72, type: 3}
+      propertyPath: droppingBarrelPrefab
+      value: 
+      objectReference: {fileID: 6634281949254019546, guid: 889cde0f9df5957409e94ed6449ef651, type: 3}
     - target: {fileID: 5423520746320192100, guid: 182650808ad12354988f28b438712d72, type: 3}
       propertyPath: m_Name
       value: Barrel_Spawner
