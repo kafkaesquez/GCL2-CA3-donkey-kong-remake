@@ -42,6 +42,16 @@ public class MarioMovement : MonoBehaviour
         
     }
 
+    public void EnableHammerHitbox()
+    {
+        hammerHitbox.SetActive(true);
+    }
+
+    public void DisableHammerHitbox()
+    {
+        hammerHitbox.SetActive(false);
+    }
+
     // Update is called once per frame
     void Update()
     {
