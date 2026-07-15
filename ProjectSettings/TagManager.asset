@@ -9,6 +9,7 @@ TagManager:
   - Barrel
   - Hammer
   - ClimbFinish
+  - HammerHitbox
   layers:
   - Default
   - TransparentFX
