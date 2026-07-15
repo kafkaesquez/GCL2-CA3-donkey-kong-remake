@@ -16,10 +16,12 @@ public class MarioMovement : MonoBehaviour
     public bool isGrounded;
     public bool hasHammer;
     public float weaponDuration = 4f;
+    public bool IsHoldingHammer => isHoldingHammer;
 
     private bool isHoldingHammer = false;
     private float hammerTimer;
     private float timer;
+    public GameObject hammerHitbox;
 
     public Animator marioanim;
 
@@ -91,6 +93,7 @@ public class MarioMovement : MonoBehaviour
         
 
     }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -117,10 +120,13 @@ public class MarioMovement : MonoBehaviour
                     
                 }
 
+
             }
+
+
         }
 
     }
-
+   
 
 }
