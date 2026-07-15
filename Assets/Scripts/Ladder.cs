@@ -2,22 +2,27 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.AnimatedValues;
+
 public class Ladder : MonoBehaviour
 {
     private float vertical;
     [SerializeField] private float Speed; //so that its easier to edit on inspector depending on the movement script that jeremy comes up with.
     [SerializeField] private float gravity; //reference to jeremy's gravity ltr on
+
     public bool isLadder;
     public bool isClimbing;
     public bool isClimbingFinish;
+
     public Animator marioanim;
+
     [SerializeField] private Rigidbody2D rb; //so we can reference mario's hitbox
-    [SerializeField] private MarioMovement marioMovement;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         marioanim = GetComponent<Animator>();
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
@@ -31,7 +36,9 @@ public class Ladder : MonoBehaviour
             print("climb has finished");
             marioanim.SetTrigger("isClimbingFinish"); //to trigger the animations for mario finishing his ladder climb
         }
+
     }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Ladder"))
@@ -43,18 +50,21 @@ public class Ladder : MonoBehaviour
             marioanim.SetBool("isClimbing", isClimbing);
         }
     }
+
     // Update is called once per frame
     void Update()
     {
         vertical = Input.GetAxis("Vertical");
-        if (isLadder && Mathf.Abs(vertical) > 0 && !marioMovement.IsHoldingHammer)
+
+        if (isLadder && Mathf.Abs(vertical) > 0)
         {
             isClimbing = true;
         }
     }
-    private void FixedUpdate() //cause we are handling physics aka the gravity
+
+        private void FixedUpdate() //cause we are handling physics aka the gravity
     {
-        if (isClimbing && !marioMovement.IsHoldingHammer)
+        if (isClimbing)
         {
             print("im gonna climbnow");
             rb.gravityScale = 0f;
@@ -66,7 +76,7 @@ public class Ladder : MonoBehaviour
         {
             rb.gravityScale = gravity;
             marioanim.speed = 1f;
-            if (marioMovement.IsHoldingHammer) isClimbing = false;
         }
     }
 }
+

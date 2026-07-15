@@ -28,7 +28,7 @@ public class WinSequence : MonoBehaviour
 
         rb.linearVelocity = Vector2.zero;
         rb.angularVelocity = 0f;
-        //stops mario from moving
+        //stops player from moving
 
         yield return new WaitForSeconds(1f);
         //pause 1 sec

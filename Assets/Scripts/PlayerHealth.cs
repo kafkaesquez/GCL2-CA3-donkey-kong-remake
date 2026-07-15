@@ -1,35 +1,12 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public int lives = 3;
-    public float invincibilityDuration = 2f;
-    public float postmortem = 1.5f;
-
-    private bool isInvincible = false;
-    private SpriteRenderer sr;
-    private int playerLayer;
-    private int barrelLayer;
-
-    private void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-        playerLayer = LayerMask.NameToLayer("Player");
-        barrelLayer = LayerMask.NameToLayer("Barrel");
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Barrel") && !isInvincible)
-        {
-            LoseLife();
-        }
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Barrel") && !isInvincible)
+        if (collision.gameObject.CompareTag("Barrel"))
         {
             LoseLife();
         }
@@ -46,38 +23,18 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            StartCoroutine(InvincibilityRoutine());
+            Respawn();
         }
     }
 
-    private IEnumerator InvincibilityRoutine()
+    private void Respawn()
     {
-        isInvincible = true;
-        Physics2D.IgnoreLayerCollision(playerLayer, barrelLayer, true);
-
-        // flicker the sprite so it's visually clear Mario's invincible
-        float elapsed = 0f;
-        while (elapsed < invincibilityDuration)
-        {
-            sr.enabled = !sr.enabled;
-            yield return new WaitForSeconds(0.1f);
-            elapsed += 0.1f;
-        }
-        sr.enabled = true;
-
-        Physics2D.IgnoreLayerCollision(playerLayer, barrelLayer, false);
-        isInvincible = false;
+        // reset Mario's position to spawn point, play hurt animation, etc.
     }
 
     private void Die()
     {
+        // game over logic — reload scene, show game over screen, etc.
         Debug.Log("Game Over");
-        StartCoroutine(GameOverRoutine());
-    }
-    private IEnumerator GameOverRoutine()
-    {
-        // trigger death animation / sound / UI here
-        yield return new WaitForSeconds(postmortem);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

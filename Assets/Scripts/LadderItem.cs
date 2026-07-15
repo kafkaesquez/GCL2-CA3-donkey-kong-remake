@@ -13,7 +13,7 @@ public class LadderItem : MonoBehaviour
         holdingLadder = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggeEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
