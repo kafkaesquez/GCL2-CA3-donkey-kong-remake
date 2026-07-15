@@ -1,3 +1,5 @@
+using System.Threading;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MarioMovement : MonoBehaviour
@@ -13,6 +15,11 @@ public class MarioMovement : MonoBehaviour
     public LayerMask groundLayer;
     public bool isGrounded;
     public bool hasHammer;
+    public float weaponDuration = 4f;
+
+    private bool isHoldingHammer = false;
+    private float hammerTimer;
+    private float timer;
 
     public Animator marioanim;
 
@@ -20,14 +27,17 @@ public class MarioMovement : MonoBehaviour
 
     public GameObject hammer;
 
-    
+
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        timer = weaponDuration;
         mariorb = GetComponent<Rigidbody2D>();
         marioanim = GetComponent<Animator>();
+        
     }
 
     // Update is called once per frame
@@ -41,18 +51,28 @@ public class MarioMovement : MonoBehaviour
 
             return;
         } //shin's ending scene 
-        
-        
-           
 
-        // (Jeremy) Left Right Movement
-        mariomovement.x = Input.GetAxisRaw("Horizontal");
+        if (isHoldingHammer)
+        {
+            hammerTimer -= Time.deltaTime;
+            if (hammerTimer <= 0f)
+            {
+                isHoldingHammer = false;
+                hasHammer = false;
+                marioanim.SetBool("hasHammer", false);
+            }
+        }
+    
+
+
+    // (Jeremy) Left Right Movement
+    mariomovement.x = Input.GetAxisRaw("Horizontal");
         mariorb.linearVelocity = new Vector2(mariomovement.x * moveSpeed, mariorb.linearVelocity.y);
 
 
-        // (Jeremy) Jumping
+        // (Jeremy) Jumping, (Jermaine) Not jumping when holding hammer
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        if (isGrounded && Input.GetButtonDown("Jump"))
+        if (isGrounded && Input.GetButtonDown("Jump") && !isHoldingHammer)
         {
             mariorb.linearVelocity = new Vector2(mariorb.linearVelocity.x, jumpForce);
             print("jumped");
@@ -68,21 +88,39 @@ public class MarioMovement : MonoBehaviour
         marioanim.SetFloat("XVelocity", Mathf.Abs(mariorb.linearVelocity.x)); // Velocity Check
         marioanim.SetBool("isGrounded", isGrounded);
 
+        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("Triggered by: " + collision.gameObject.name);
 
-        if (collision.gameObject.tag == "Hammer")  //(Jermaine) when mario picks up hammer
+        if (collision.gameObject.tag == "Hammer")
         {
-            Destroy(hammer);  //(Jermaine) removes hammer sprite after picking up
+            Destroy(collision.gameObject); // (Jermaine) destroy this hammer Mario collides with hammer
             marioanim.SetBool("hasHammer", true);
             hasHammer = true;
+            isHoldingHammer = true;      
+            hammerTimer = weaponDuration; 
 
+            // (Jermaine) When mario has hammer
+            if (isHoldingHammer)
+            {
+                hammerTimer -= Time.deltaTime;
+                // (Jermaine) when hammer duration ends
+                if (hammerTimer <= 0f)
+                {
+                    isHoldingHammer = false;
+                    hasHammer = false;
+                    marioanim.SetBool("hasHammer", false); // (Jermaine) goes back to idle Mario
+                    
+                    
+                }
 
-
+            }
         }
+
     }
+
 
 }
