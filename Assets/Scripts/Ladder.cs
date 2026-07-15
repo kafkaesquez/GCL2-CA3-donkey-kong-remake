@@ -16,11 +16,14 @@ public class Ladder : MonoBehaviour
     public Animator marioanim;
 
     [SerializeField] private Rigidbody2D rb; //so we can reference mario's hitbox
+    [SerializeField] private MarioMovement marioMovement; //so we can reference mario's controller
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         marioanim = GetComponent<Animator>();
+        if (marioMovement == null)
+            marioMovement = GetComponent<MarioMovement>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,13 +59,19 @@ public class Ladder : MonoBehaviour
     {
         vertical = Input.GetAxis("Vertical");
 
-        if (isLadder && Mathf.Abs(vertical) > 0)
+        if (isLadder && Mathf.Abs(vertical) > 0 && (marioMovement == null || !marioMovement.IsHoldingHammer))
         {
             isClimbing = true;
         }
+
+        // (Jermaine) If already climbing and hammer gets picked up mid-climb, cancel it
+        if (isClimbing && marioMovement != null && marioMovement.IsHoldingHammer)
+        {
+            isClimbing = false;
+        }
     }
 
-        private void FixedUpdate() //cause we are handling physics aka the gravity
+    private void FixedUpdate() //cause we are handling physics aka the gravity
     {
         if (isClimbing)
         {

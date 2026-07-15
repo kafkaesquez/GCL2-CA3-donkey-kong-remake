@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     public float invincibilityDuration = 2f;
     public float postmortem = 1.5f;
 
+    
+
     private bool isInvincible = false;
     private SpriteRenderer sr;
     private int playerLayer;
@@ -18,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         playerLayer = LayerMask.NameToLayer("Player");
         barrelLayer = LayerMask.NameToLayer("Barrel");
+
+        Debug.Log($"playerLayer: {playerLayer}, barrelLayer: {barrelLayer}"); //test
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -80,4 +84,6 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(postmortem);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+
 }

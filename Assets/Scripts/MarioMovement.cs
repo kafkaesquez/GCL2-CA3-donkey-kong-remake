@@ -21,7 +21,7 @@ public class MarioMovement : MonoBehaviour
     private bool isHoldingHammer = false;
     private float hammerTimer;
     private float timer;
-    public GameObject hammerHitbox;
+    
 
     public Animator marioanim;
 
@@ -42,15 +42,7 @@ public class MarioMovement : MonoBehaviour
         
     }
 
-    public void EnableHammerHitbox()
-    {
-        hammerHitbox.SetActive(true);
-    }
-
-    public void DisableHammerHitbox()
-    {
-        hammerHitbox.SetActive(false);
-    }
+ 
 
     // Update is called once per frame
     void Update()
@@ -63,7 +55,7 @@ public class MarioMovement : MonoBehaviour
 
             return;
         } //shin's ending scene 
-
+        
         if (isHoldingHammer)
         {
             hammerTimer -= Time.deltaTime;
@@ -71,7 +63,8 @@ public class MarioMovement : MonoBehaviour
             {
                 isHoldingHammer = false;
                 hasHammer = false;
-                marioanim.SetBool("hasHammer", false);
+                marioanim.SetBool("hasHammer", false); 
+               
             }
         }
     
