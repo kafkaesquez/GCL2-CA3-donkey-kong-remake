@@ -8,28 +8,56 @@ public class PlayerHealth : MonoBehaviour
     public float invincibilityDuration = 2f;
     public float postmortem = 1.5f;
 
-    
+    public float bounceForce = 8f;
+    public float parryWindow = 0.2f;
+    private float lastJumpPressedTime = -999f;
 
     private bool isInvincible = false;
     private SpriteRenderer sr;
+    private Rigidbody2D rb;
     private int playerLayer;
     private int barrelLayer;
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
         playerLayer = LayerMask.NameToLayer("Player");
         barrelLayer = LayerMask.NameToLayer("Barrel");
 
         Debug.Log($"playerLayer: {playerLayer}, barrelLayer: {barrelLayer}"); //test
     }
 
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            lastJumpPressedTime = Time.time;
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Barrel") && !isInvincible)
+        if (!collision.gameObject.CompareTag("Barrel") || isInvincible) return;
+
+        ContactPoint2D contact = collision.GetContact(0);
+        bool landedOnTop = contact.normal.y > 0.5f && rb.linearVelocity.y <= 0.1f;
+        bool withinParryWindow = Time.time - lastJumpPressedTime <= parryWindow;
+
+        if (landedOnTop && withinParryWindow)
+        {
+            ParryBounce(collision.gameObject);
+        }
+        else
         {
             LoseLife();
         }
+    }
+
+    private void ParryBounce(GameObject barrel)
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounceForce);
+        Destroy(barrel);
+        // hook in a sound/particle effect here if you want feedback
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -5325,7 +5325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 972514428}
   - component: {fileID: 972514429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -7315,7 +7315,7 @@ GameObject:
   - component: {fileID: 1348781830}
   - component: {fileID: 1348781831}
   - component: {fileID: 1348781832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mario
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -7329,7 +7329,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1348781823}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 00ef5376af05c334dad142041f21a18c, type: 2}
@@ -7587,6 +7587,8 @@ MonoBehaviour:
   lives: 3
   invincibilityDuration: 2
   postmortem: 1.5
+  bounceForce: 4
+  parryWindow: 0.4
 --- !u!1 &1362483804
 GameObject:
   m_ObjectHideFlags: 0
