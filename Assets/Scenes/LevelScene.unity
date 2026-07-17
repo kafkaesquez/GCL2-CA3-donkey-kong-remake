@@ -7664,7 +7664,7 @@ MonoBehaviour:
   isClimbingFinish: 0
   marioanim: {fileID: 1348781830}
   rb: {fileID: 1348781825}
-  marioMovement: {fileID: 0}
+  marioMovement: {fileID: 1348781828}
 --- !u!114 &1348781832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7680,6 +7680,7 @@ MonoBehaviour:
   lives: 3
   invincibilityDuration: 2
   postmortem: 1.5
+  marioMovement: {fileID: 1348781828}
   bounceForce: 4
   parryWindow: 0.4
 --- !u!1 &1362483804

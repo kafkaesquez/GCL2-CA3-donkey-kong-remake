@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int lives = 3;
     public float invincibilityDuration = 2f;
     public float postmortem = 1.5f;
+    public MarioMovement marioMovement;
 
     public float bounceForce = 8f;
     public float parryWindow = 0.2f;
@@ -38,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Barrel") || isInvincible) return;
+        if (isInvincible || marioMovement.IsHoldingHammer) return;
 
         ContactPoint2D contact = collision.GetContact(0);
         bool landedOnTop = contact.normal.y > 0.5f && rb.linearVelocity.y <= 0.1f;
@@ -61,10 +63,10 @@ public class PlayerHealth : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Barrel") && !isInvincible)
-        {
-            LoseLife();
-        }
+        if (!collision.gameObject.CompareTag("Barrel")) return; 
+        if (isInvincible || marioMovement.IsHoldingHammer) return; 
+        
+        LoseLife();
     }
 
     private void LoseLife()
