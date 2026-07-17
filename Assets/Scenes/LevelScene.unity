@@ -913,6 +913,97 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9091953581570824724, guid: 1c950858893217f46a996e231be0e6c2, type: 3}
   m_PrefabInstance: {fileID: 152006888}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &156311070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 156311073}
+  - component: {fileID: 156311071}
+  - component: {fileID: 156311072}
+  m_Layer: 0
+  m_Name: HammerHitbox
+  m_TagString: HammerHitbox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &156311071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156311070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53ba67ed22cebe5488a3e2fe4bfd39e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &156311072
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156311070}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.16473961, y: -0.24018145}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.23942566, y: 0.48884487}
+  m_EdgeRadius: 0
+--- !u!4 &156311073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156311070}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.22522217, y: 0.24555221, z: -0.016056275}
+  m_LocalScale: {x: 1.2712495, y: 1.2712495, z: 1.2712495}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1348781827}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &163931390
 GameObject:
   m_ObjectHideFlags: 0
@@ -7459,11 +7550,12 @@ Transform:
   m_GameObject: {fileID: 1348781823}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.9, y: 0.83, z: 0}
+  m_LocalPosition: {x: 20.9, y: 7.39, z: 0}
   m_LocalScale: {x: 0.78662765, y: 0.78662765, z: 0.78662765}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 972514428}
+  - {fileID: 156311073}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1348781828
@@ -7490,7 +7582,7 @@ MonoBehaviour:
   isGrounded: 0
   hasHammer: 0
   weaponDuration: 10
-  hammerHitbox: {fileID: 0}
+  hammerHitbox: {fileID: 156311071}
   marioanim: {fileID: 1348781830}
   canMove: 1
   hammer: {fileID: 632585284}
