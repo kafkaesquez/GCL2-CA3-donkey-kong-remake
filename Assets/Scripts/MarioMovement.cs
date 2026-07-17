@@ -16,11 +16,13 @@ public class MarioMovement : MonoBehaviour
     public bool isGrounded;
     public bool hasHammer;
     public float weaponDuration = 4f;
+    public HammerHitbox hammerHitbox;
     public bool IsHoldingHammer => isHoldingHammer;
 
     private bool isHoldingHammer = false;
     private float hammerTimer;
     private float timer;
+
     
 
     public Animator marioanim;
@@ -59,12 +61,13 @@ public class MarioMovement : MonoBehaviour
         if (isHoldingHammer)
         {
             hammerTimer -= Time.deltaTime;
+             
             if (hammerTimer <= 0f)
             {
                 isHoldingHammer = false;
                 hasHammer = false;
-                marioanim.SetBool("hasHammer", false); 
-               
+                marioanim.SetBool("hasHammer", false);
+                hammerHitbox.DisableHitbox(); // (Jermaine) turns collider off
             }
         }
     
@@ -107,20 +110,22 @@ public class MarioMovement : MonoBehaviour
             marioanim.SetBool("hasHammer", true);
             hasHammer = true;
             isHoldingHammer = true;      
-            hammerTimer = weaponDuration; 
+            hammerTimer = weaponDuration;
+
+            hammerHitbox.EnableHitbox(); // (Jermaine) turns hammer collider on
 
             // (Jermaine) When mario has hammer
             if (isHoldingHammer)
             {
                 hammerTimer -= Time.deltaTime;
+                
                 // (Jermaine) when hammer duration ends
                 if (hammerTimer <= 0f)
                 {
                     isHoldingHammer = false;
                     hasHammer = false;
                     marioanim.SetBool("hasHammer", false); // (Jermaine) goes back to idle Mario
-                    
-                    
+
                 }
 
 

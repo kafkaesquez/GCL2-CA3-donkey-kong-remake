@@ -12,15 +12,13 @@ public class Barrels : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             rb.AddForce(collision.transform.right * speed, ForceMode2D.Impulse);
         }
 
-        if (collision.gameObject.CompareTag("HammerHitbox"))
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
 }
