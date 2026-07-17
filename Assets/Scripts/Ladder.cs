@@ -37,9 +37,9 @@ public class Ladder : MonoBehaviour
         if (collision.CompareTag("ClimbFinish"))
         {
             print("climb has finished");
-            marioanim.SetTrigger("isClimbingFinish"); //to trigger the animations for mario finishing his ladder climb
+            isClimbingFinish = true;
+            marioanim.SetBool("isClimbingFinish", isClimbingFinish); //to trigger the animations for mario finishing his ladder climb
         }
-
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -48,9 +48,14 @@ public class Ladder : MonoBehaviour
         {
             isLadder = false;
             isClimbing = false;
-            isClimbingFinish = false;
             marioanim.speed = 1f;
             marioanim.SetBool("isClimbing", isClimbing);
+        }
+        if (collision.CompareTag("ClimbFinish"))
+        {
+            isClimbingFinish = false;
+            marioanim.SetBool("isClimbingFinish", isClimbingFinish);
+            print("left climb finish zone");
         }
     }
 
