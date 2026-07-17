@@ -18,7 +18,11 @@ public class Barrels : MonoBehaviour
             rb.AddForce(collision.transform.right * speed, ForceMode2D.Impulse);
         }
 
-        
+        if (collision.gameObject.CompareTag("HammerHitbox"))
+        {
+            Destroy(gameObject);
+        }
+
     }
 
 }
