@@ -6,6 +6,9 @@ public class MarioMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
+    public float speedMultiplier = 1f; // (Jermaine) Floor speed: ill add on tmr to fix
+    public float acceleration = 10f;   
+
     public Rigidbody2D mariorb;
     public Vector2 mariomovement;
 
