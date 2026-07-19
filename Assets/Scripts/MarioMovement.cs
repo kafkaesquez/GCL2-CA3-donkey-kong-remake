@@ -99,7 +99,7 @@ public class MarioMovement : MonoBehaviour
             Time.timeScale = 0.5f;
             currentMoveSpeed = moveSpeed / Time.timeScale;
             currentJumpForce = jumpForce / Time.timeScale;
-            blueoverlay.enabled = true;   // 50% opacity
+            blueoverlay.enabled = true;   
             //if (slowmoTimer <= 1.0f)
             //{
             //    colour.a = 0.5f;
