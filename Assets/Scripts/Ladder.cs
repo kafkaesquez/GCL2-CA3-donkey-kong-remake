@@ -5,9 +5,11 @@ using UnityEditor.AnimatedValues;
 
 public class Ladder : MonoBehaviour
 {
-    private float vertical;
-    [SerializeField] private float Speed; //so that its easier to edit on inspector depending on the movement script that jeremy comes up with.
-    [SerializeField] private float gravity; //reference to jeremy's gravity ltr on
+    public float vertical;
+    [SerializeField] public float Speed; //so that its easier to edit on inspector depending on the movement script that jeremy comes up with.
+    [SerializeField] public float gravity; //reference to jeremy's gravity ltr on   
+
+    [SerializeField] public float currentSpeed;
 
     public bool isLadder;
     public bool isClimbing;
@@ -78,11 +80,35 @@ public class Ladder : MonoBehaviour
 
     private void FixedUpdate() //cause we are handling physics aka the gravity
     {
+        float currentSpeed = Speed;
+
+
+        if (marioMovement.inSlowmo) //(Jeremy) slo-mo effect added by Jeremy, can't get it to work on MarioMovement script no matter what i try, sorry! rest of the script works as intended!
+        {
+            //print("ladder recieved in slow mo");
+            currentSpeed = Speed / Time.timeScale;
+            if (!isClimbing)
+            {
+                gravity = 4f; // (Jeremy) Ensure mario can climb ladders normally even in slow mo
+            }
+            else gravity = 0f;
+        }
+        else
+        {
+            currentSpeed = (Speed = Time.timeScale);
+            gravity = 1f;
+        }
+
+
+
+
+
+
         if (isClimbing)
         {
             print("im gonna climbnow");
             rb.gravityScale = 0f;
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * Speed); //makes it so mario can go up and down without gravity weighing on him
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, vertical * currentSpeed); //makes it so mario can go up and down without gravity weighing on him
             marioanim.SetBool("isClimbing", isClimbing);
             marioanim.speed = Mathf.Abs(vertical) > 0f ? 1f : 0f; //to calculate the climbing frames when mario moves instead of it being a static sprite when going up
         }
