@@ -10,6 +10,7 @@ TagManager:
   - Hammer
   - ClimbFinish
   - HammerHitbox
+  - Slowmo
   layers:
   - Default
   - TransparentFX
