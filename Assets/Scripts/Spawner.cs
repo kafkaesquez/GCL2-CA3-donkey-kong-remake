@@ -31,8 +31,8 @@ public class Spawner : MonoBehaviour
         }
         else // original barrel spawn script
         {
-            prefabToSpawn = (Random.value < skipBarrelChance)
-              ? droppingBarrelPrefab
+            prefabToSpawn = (Random.value < skipBarrelChance) //random.value returns a random decimal between 0 and 1
+              ? droppingBarrelPrefab //ternary operater, simplified version of if.. else...
               : normalBarrelPrefab;
         }
           

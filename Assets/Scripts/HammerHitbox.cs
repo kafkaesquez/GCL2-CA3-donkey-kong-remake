@@ -29,17 +29,14 @@ public class HammerHitbox : MonoBehaviour
         Debug.Log($"[{gameObject.name} | ID:{gameObject.GetInstanceID()}] Hammer trigger hit: {collision.gameObject.name} | this collider enabled: {hitboxCollider.enabled}", this);
         if (collision.CompareTag("Barrel"))
         {
-            if (collision.CompareTag("Barrel"))
-            {
-                BlooperBarrel blooper = collision.GetComponent<BlooperBarrel>();
+                BlooperBarrel blooper = collision.GetComponent<BlooperBarrel>(); //shin's blooper barrel feature
 
                 if (blooper != null)
                 {
                     blooper.ActivateInk();
                 }
 
-                Destroy(collision.gameObject);
-            }
+                Destroy(collision.gameObject);            
         }
 
     }

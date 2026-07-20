@@ -11,8 +11,6 @@ public class InkManager : MonoBehaviour
     public void ShowInk()
     {
 
-        Debug.Log("ShowInk called.");
-
         if (inkActive) //is ink playing? if yes, stop here, do nothing
             return;
 
