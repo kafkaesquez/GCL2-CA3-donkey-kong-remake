@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4290023989217028628}
   - component: {fileID: -6953019674707222337}
   - component: {fileID: -7817639635481286582}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BlooperBarrel
   m_TagString: Barrel
   m_Icon: {fileID: 0}

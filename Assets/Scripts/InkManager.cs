@@ -10,20 +10,24 @@ public class InkManager : MonoBehaviour
 
     public void ShowInk()
     {
-        Debug.Log("animation is trigger");
-        if (inkActive)
+
+        Debug.Log("ShowInk called.");
+
+        if (inkActive) //is ink playing? if yes, stop here, do nothing
             return;
 
-        inkActive = true;
+        inkActive = true; //ink isn't playing initially, so it proceeds to play the ink.
 
+        //start animation of blooper and inks
         blooperParentAnimator.SetTrigger("Appear");
         blooperAnimator.SetTrigger("Appear");
         inkAnimator.SetTrigger("Appear");
 
         Invoke(nameof(ResetInk), inkDuration); //reset ink in desired (5) seconds
+        //something like an alarm clock!
     }
 
-    private void ResetInk()
+    private void ResetInk() //sets it all back to the initial state, resets it. 
     {
         inkActive=false;
     }

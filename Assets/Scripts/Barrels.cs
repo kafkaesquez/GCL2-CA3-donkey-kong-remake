@@ -18,18 +18,6 @@ public class Barrels : MonoBehaviour
             rb.AddForce(collision.transform.right * speed, ForceMode2D.Impulse);
         }
 
-        if (collision.gameObject.CompareTag("HammerHitbox"))
-        {
-            BlooperBarrel blooper = GetComponent<BlooperBarrel>();
-
-            if (blooper != null) //if found squid barrel, run the code, if not, skip
-            {
-                blooper.ActivateInk();
-            }
-
-            Destroy(gameObject);
-        }
-
     }
 
 }

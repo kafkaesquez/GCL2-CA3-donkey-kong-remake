@@ -11,7 +11,7 @@ public class HammerHitbox : MonoBehaviour
         hitboxCollider.enabled = false; // (Jermaine) Disables the hammer collider before picking up hammer
     }
 
-    
+
 
     public void DisableHitbox()
     {
@@ -29,8 +29,18 @@ public class HammerHitbox : MonoBehaviour
         Debug.Log($"[{gameObject.name} | ID:{gameObject.GetInstanceID()}] Hammer trigger hit: {collision.gameObject.name} | this collider enabled: {hitboxCollider.enabled}", this);
         if (collision.CompareTag("Barrel"))
         {
-            Destroy(collision.gameObject);
-        }
-    }
+            if (collision.CompareTag("Barrel"))
+            {
+                BlooperBarrel blooper = collision.GetComponent<BlooperBarrel>();
 
+                if (blooper != null)
+                {
+                    blooper.ActivateInk();
+                }
+
+                Destroy(collision.gameObject);
+            }
+        }
+
+    }
 }
