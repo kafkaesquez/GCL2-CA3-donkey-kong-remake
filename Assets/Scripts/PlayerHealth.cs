@@ -45,6 +45,13 @@ public class PlayerHealth : MonoBehaviour
         bool landedOnTop = contact.normal.y > 0.5f && rb.linearVelocity.y <= 0.1f;
         bool withinParryWindow = Time.time - lastJumpPressedTime <= parryWindow;
 
+        BlooperBarrel blooper = collision.gameObject.GetComponent<BlooperBarrel>(); //shin's add function
+        
+        if (blooper != null)
+        {
+            blooper.ActivateInk();
+        }
+
         if (landedOnTop && withinParryWindow)
         {
             ParryBounce(collision.gameObject);
@@ -64,8 +71,15 @@ public class PlayerHealth : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.gameObject.CompareTag("Barrel")) return; 
-        if (isInvincible || marioMovement.IsHoldingHammer) return; 
-        
+        if (isInvincible || marioMovement.IsHoldingHammer) return;
+
+        BlooperBarrel blooper = collision.gameObject.GetComponent<BlooperBarrel>(); //shin's add function
+
+        if (blooper != null)
+        {
+            blooper.ActivateInk();
+        }
+
         LoseLife();
     }
 
