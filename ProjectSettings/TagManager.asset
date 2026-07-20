@@ -11,6 +11,8 @@ TagManager:
   - ClimbFinish
   - HammerHitbox
   - Slowmo
+  - StickyFloor
+  - SlipperyFloor
   layers:
   - Default
   - TransparentFX
@@ -56,6 +58,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 591797839
+    locked: 0
+  - name: SpecialGround
+    uniqueID: 1518091859
     locked: 0
   - name: Player
     uniqueID: 2932936769

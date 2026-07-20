@@ -9,7 +9,8 @@ public class MarioMovement : MonoBehaviour
     public float jumpForce = 7f;
     public float currentJumpForce;
 
-
+    [Header("Air Control")]
+    public float airAcceleration = 10f;
     public float speedMultiplier = 1f; // (Jermaine) Floor speed: ill add on tmr to fix
     public float acceleration = 10f;   
 
@@ -126,7 +127,7 @@ public class MarioMovement : MonoBehaviour
 
         }
 
-        
+
 
 
 
@@ -134,8 +135,15 @@ public class MarioMovement : MonoBehaviour
 
         // (Jeremy) Left Right Movement
         mariomovement.x = Input.GetAxisRaw("Horizontal");
-        mariorb.linearVelocity = new Vector2(mariomovement.x * currentMoveSpeed, mariorb.linearVelocity.y);
 
+        // ground check
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        // (Jermaine) Sticky/Slippery Floors
+        float accel = isGrounded ? acceleration : airAcceleration;
+        float targetVelocityX = mariomovement.x * currentMoveSpeed * speedMultiplier;
+        float newVelocityX = Mathf.MoveTowards(mariorb.linearVelocity.x, targetVelocityX, accel * Time.deltaTime);
+        mariorb.linearVelocity = new Vector2(newVelocityX, mariorb.linearVelocity.y);
 
         // (Jeremy) Jumping, (Jermaine) Not jumping when holding hammer
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
