@@ -12,7 +12,6 @@ TagManager:
   - HammerHitbox
   - Slowmo
   - StickyFloor
-  - SlipperyFloor
   layers:
   - Default
   - TransparentFX
