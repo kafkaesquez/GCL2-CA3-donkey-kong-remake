@@ -8,6 +8,7 @@ public class Barrels : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        Destroy(gameObject, 36f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

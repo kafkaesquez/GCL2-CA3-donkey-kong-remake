@@ -9098,7 +9098,8 @@ MonoBehaviour:
   postmortem: 1.5
   marioMovement: {fileID: 1348781828}
   bounceForce: 4
-  parryWindow: 0.4
+  parryWindow: 0.5
+  flashDuration: 0.15
 --- !u!1 &1362483804
 GameObject:
   m_ObjectHideFlags: 0

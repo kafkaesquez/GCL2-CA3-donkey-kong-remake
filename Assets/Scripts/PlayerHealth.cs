@@ -19,13 +19,16 @@ public class PlayerHealth : MonoBehaviour
     private int playerLayer;
     private int barrelLayer;
 
+    public float flashDuration = 0.15f;
+    private Color originalColor;
+
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         playerLayer = LayerMask.NameToLayer("Player");
         barrelLayer = LayerMask.NameToLayer("Barrel");
-
+        originalColor = sr.color;
         Debug.Log($"playerLayer: {playerLayer}, barrelLayer: {barrelLayer}"); //test
     }
 
@@ -59,6 +62,7 @@ public class PlayerHealth : MonoBehaviour
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounceForce);
         Destroy(barrel);
+        StartCoroutine(Flash());
         // hook in a sound/particle effect here if you want feedback
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -115,5 +119,10 @@ public class PlayerHealth : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-
+    private IEnumerator Flash()
+    {
+        sr.color = Color.green;
+        yield return new WaitForSeconds(flashDuration);
+        sr.color = originalColor;
+    }
 }
