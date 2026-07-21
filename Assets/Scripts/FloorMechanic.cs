@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class FloorEffect : MonoBehaviour
 {
-    public float speedMultiplier = 1f;   // e.g. 1.5 for ice (faster/slidey), 0.5 for sticky (slower)
-    public float acceleration = 10f;     // e.g. 2 for ice (slow to speed up/stop), 30 for sticky (grippy)
+    public float speedMultiplier = 1f;   
+    public float acceleration = 10f;     
 
-    [Header("Defaults to restore on exit")]
+    // (Jermaine) defult mario movement speed
     public float defaultSpeedMultiplier = 1f;
     public float defaultAcceleration = 10f;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //when mario enters the sticky floor collider
     {
-        if (collision.TryGetComponent<MarioMovement>(out var mario))
+        if (collision.TryGetComponent<MarioMovement>(out var mario)) 
         {
-            mario.speedMultiplier = speedMultiplier;
+            mario.speedMultiplier = speedMultiplier; //follows whatever speed set in inspector
             mario.acceleration = acceleration;
         }
     }
