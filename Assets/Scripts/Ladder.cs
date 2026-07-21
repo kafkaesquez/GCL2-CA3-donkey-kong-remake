@@ -1,7 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.AnimatedValues;
 
 public class Ladder : MonoBehaviour
 {

@@ -13,6 +13,7 @@ TagManager:
   - Slowmo
   - StickyFloor
   - LadderItem
+  - DonkeyKong
   layers:
   - Default
   - TransparentFX

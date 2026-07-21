@@ -1,5 +1,3 @@
-using System.Threading;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MarioMovement : MonoBehaviour
@@ -12,7 +10,8 @@ public class MarioMovement : MonoBehaviour
     //sticky floors
     public float airAcceleration = 10f;
     public float speedMultiplier = 1f; 
-    public float acceleration = 10f;   
+    public float acceleration = 10f;
+    public float currentAcceleration;
 
     
     public Rigidbody2D mariorb;
@@ -48,6 +47,12 @@ public class MarioMovement : MonoBehaviour
 
 
     [SerializeField] private Ladder laddercode;
+
+
+    private void Awake()
+    {
+        
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -114,7 +119,7 @@ public class MarioMovement : MonoBehaviour
 
 
             // (Jeremy) Exit slomo
-            if ((slowmoTimer <= 0.0f) && isGrounded || !inSlowmo)
+            if ((slowmoTimer <= 0.0f) && isGrounded || !inSlowmo || !canMove)
             {
                 inSlowmo = false;
                 Time.timeScale = 1f;
@@ -150,7 +155,7 @@ public class MarioMovement : MonoBehaviour
         if (isGrounded && Input.GetButtonDown("Jump") && !isHoldingHammer)
         {
             mariorb.linearVelocity = new Vector2(mariorb.linearVelocity.x, currentJumpForce);
-            print("jumped");
+            
         }
 
         // (Jeremy) Flip Sprite based on direction

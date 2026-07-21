@@ -41,8 +41,8 @@ public class LadderItem : MonoBehaviour
     void PlaceLadder()
     {
         Vector3 spawnPos = placePoint != null ? placePoint.position : transform.position; //null is there as a safeholder just in case placepoint is empty, so it falls to marios own position
-        Instantiate(ladderPrefab, spawnPos, Quaternion.identity); 
-
+        Instantiate(ladderPrefab, spawnPos, Quaternion.identity);
+        LadderInstructions.SetActive(false);
         holdingLadder = false;
         marioanim.SetBool("HoldingLadder", holdingLadder);
     }

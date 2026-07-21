@@ -60,19 +60,19 @@ public class WinSequence : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSecondsRealtime(1f);
         //pause 1 sec
 
         heart.SetActive(true);
         //reveal da heart
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSecondsRealtime(2f);
         //pause 2 secs
 
         donkeyKongAnimator.SetTrigger("Shock");
         //play donkey kong shocked animation 
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSecondsRealtime(5f);
         //pause 5 secs
 
         SceneManager.LoadScene("WinScene");

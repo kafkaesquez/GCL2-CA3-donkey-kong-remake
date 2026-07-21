@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,7 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public MarioMovement marioMovement;
 
     public float bounceForce = 8f;
-    public float parryWindow = 0.2f;
+    public float parryWindow = 2f;
     private float lastJumpPressedTime = -999f;
 
     private bool isInvincible = false;
@@ -18,6 +19,7 @@ public class PlayerHealth : MonoBehaviour
     private Rigidbody2D rb;
     private int playerLayer;
     private int barrelLayer;
+    public GameObject mario;
 
     public float flashDuration = 0.15f;
     private Color originalColor;
@@ -37,24 +39,39 @@ public class PlayerHealth : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             lastJumpPressedTime = Time.time;
+            Debug.Log($"Jump pressed at {lastJumpPressedTime}");
         }
     }
     private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (!collision.gameObject.CompareTag("Barrel") || isInvincible) return;
         if (isInvincible || marioMovement.IsHoldingHammer) return;
+
+
         //(Matthew) Barrel/Mario collision & parry logic
+
+
         ContactPoint2D contact = collision.GetContact(0);
-        bool landedOnTop = contact.normal.y > 0.5f && rb.linearVelocity.y <= 0.1f;
+        bool landedOnTop = contact.normal.y > 0.5f && rb.linearVelocity.y <= 0.2f;
         bool withinParryWindow = Time.time - lastJumpPressedTime <= parryWindow;
+        //float elapsed = Time.time - lastJumpPressedTime;
+        //print(elapsed);
+
+
+        if (landedOnTop)
+            print("landedOnTop");
+        if (withinParryWindow)
+            print("withinParryWindow");
 
         if (landedOnTop && withinParryWindow)
         {
             ParryBounce(collision.gameObject);
+            //print("parry bounce triggered");
         }
         else
         {
             LoseLife();
+            print("Lose life");
         }
     }
     //(Matthew)
@@ -63,6 +80,7 @@ public class PlayerHealth : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounceForce);
         Destroy(barrel);
         StartCoroutine(Flash());
+        //print("Barrel destroyed!");
         
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -98,7 +116,7 @@ public class PlayerHealth : MonoBehaviour
         while (elapsed < invincibilityDuration)
         {
             sr.enabled = !sr.enabled;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSecondsRealtime(0.1f);
             elapsed += 0.1f;
         }
         sr.enabled = true;
@@ -114,15 +132,20 @@ public class PlayerHealth : MonoBehaviour
     }
     private IEnumerator GameOverRoutine()
     {
-        
-        yield return new WaitForSeconds(postmortem);
+
+        Time.timeScale = 0;
+        Animator marioAnimator = mario.GetComponent<Animator>();
+        marioAnimator.enabled = false;
+        yield return new WaitForSecondsRealtime(postmortem);
+        Time.timeScale = 1;
+        marioAnimator.enabled = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private IEnumerator Flash()
     {
         sr.color = Color.green;
-        yield return new WaitForSeconds(flashDuration);
+        yield return new WaitForSecondsRealtime(flashDuration);
         sr.color = originalColor;
     }
 }
