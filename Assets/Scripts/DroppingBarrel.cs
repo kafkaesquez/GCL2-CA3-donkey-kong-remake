@@ -8,6 +8,7 @@ public class DroppingBarrel : MonoBehaviour
     public float lifetime = 5f;
 
     private int platformLayer;
+    //(Matthew) Dropping Barrel logic
 
     private void Awake()
     {

@@ -20,19 +20,19 @@ public class Spawner : MonoBehaviour
     {
         CancelInvoke();
     }
-
-    private void Spawn() //unity calls spawn every few seconds
+    //(Matthew) Spawn chance between regular and dropping barrel
+    private void Spawn() 
     {
         GameObject prefabToSpawn;
 
-        if (Random.value < blooperBarrelChance) //is this a blooper barrel?
+        if (Random.value < blooperBarrelChance) 
         {
             prefabToSpawn = blooperBarrelPrefab;
         }
-        else // original barrel spawn script
+        else 
         {
-            prefabToSpawn = (Random.value < skipBarrelChance) //random.value returns a random decimal between 0 and 1
-              ? droppingBarrelPrefab //ternary operater, simplified version of if.. else...
+            prefabToSpawn = (Random.value < skipBarrelChance) 
+              ? droppingBarrelPrefab 
               : normalBarrelPrefab;
         }
           

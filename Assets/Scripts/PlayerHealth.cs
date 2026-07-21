@@ -31,7 +31,7 @@ public class PlayerHealth : MonoBehaviour
         originalColor = sr.color;
         Debug.Log($"playerLayer: {playerLayer}, barrelLayer: {barrelLayer}"); //test
     }
-
+    
     private void Update()
     {
         if (Input.GetButtonDown("Jump"))
@@ -39,11 +39,11 @@ public class PlayerHealth : MonoBehaviour
             lastJumpPressedTime = Time.time;
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision) 
     {
         if (!collision.gameObject.CompareTag("Barrel") || isInvincible) return;
         if (isInvincible || marioMovement.IsHoldingHammer) return;
-
+        //(Matthew) Barrel/Mario collision & parry logic
         ContactPoint2D contact = collision.GetContact(0);
         bool landedOnTop = contact.normal.y > 0.5f && rb.linearVelocity.y <= 0.1f;
         bool withinParryWindow = Time.time - lastJumpPressedTime <= parryWindow;
@@ -57,13 +57,13 @@ public class PlayerHealth : MonoBehaviour
             LoseLife();
         }
     }
-
+    //(Matthew)
     private void ParryBounce(GameObject barrel)
     {
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, bounceForce);
         Destroy(barrel);
         StartCoroutine(Flash());
-        // hook in a sound/particle effect here if you want feedback
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -114,7 +114,7 @@ public class PlayerHealth : MonoBehaviour
     }
     private IEnumerator GameOverRoutine()
     {
-        // trigger death animation / sound / UI here
+        
         yield return new WaitForSeconds(postmortem);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
