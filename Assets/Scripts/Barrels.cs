@@ -4,7 +4,7 @@ public class Barrels : MonoBehaviour
 {
     private Rigidbody2D rb;
     public float speed = 1f;
-
+    //(Matthew) Barrel logic
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
