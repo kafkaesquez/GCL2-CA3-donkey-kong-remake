@@ -9,9 +9,9 @@ public class MarioMovement : MonoBehaviour
     public float jumpForce = 7f;
     public float currentJumpForce;
 
-    [Header("Air Control")]
+    //sticky floors
     public float airAcceleration = 10f;
-    public float speedMultiplier = 1f; // (Jermaine) Floor speed: ill add on tmr to fix
+    public float speedMultiplier = 1f; 
     public float acceleration = 10f;   
 
     
@@ -44,7 +44,7 @@ public class MarioMovement : MonoBehaviour
 
     public bool canMove = true; //shin's ending scene
 
-    //public GameObject hammer;
+    
 
 
     [SerializeField] private Ladder laddercode;
@@ -139,9 +139,9 @@ public class MarioMovement : MonoBehaviour
         // ground check
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        // (Jermaine) Sticky/Slippery Floors
+        // (Jermaine) Sticky Floors
         float accel = isGrounded ? acceleration : airAcceleration;
-        float targetVelocityX = mariomovement.x * currentMoveSpeed * speedMultiplier;
+        float targetVelocityX = mariomovement.x * currentMoveSpeed * speedMultiplier; 
         float newVelocityX = Mathf.MoveTowards(mariorb.linearVelocity.x, targetVelocityX, accel * Time.deltaTime);
         mariorb.linearVelocity = new Vector2(newVelocityX, mariorb.linearVelocity.y);
 
